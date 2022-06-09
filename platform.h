@@ -46,12 +46,12 @@ double timer()
 
 static inline double timer()
 {
-    timespec ts;
+    struct timespec ts;
     ts.tv_sec = 0;
     ts.tv_nsec = 0;
     int status = clock_gettime(CLOCK_MONOTONIC, &ts);
     assert(status == 0);
-    return double(ts.tv_sec) + 1.0e-9 * double(ts.tv_nsec);
+    return ((double) (ts.tv_sec)) + 1.0e-9 * ((double) (ts.tv_nsec));
 }
 
 #else

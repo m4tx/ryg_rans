@@ -47,18 +47,18 @@ typedef union {
     uint32_t lane[4];
 } RansSimdDec;
 
-union RansWordSlot {
+typedef union {
     uint32_t u32;
     struct {
         uint16_t freq;
         uint16_t bias;
     };
-};
+} RansWordSlot;
 
-struct RansWordTables {
+typedef struct {
     RansWordSlot slots[RANS_WORD_M];
     uint8_t slot2sym[RANS_WORD_M];
-};
+} RansWordTables;
 
 // Initialize slots for a symbol in the table
 static inline void RansWordTablesInitSymbol(RansWordTables* tab, uint8_t sym, uint32_t start, uint32_t freq)
@@ -181,6 +181,7 @@ static inline uint32_t RansSimdDecSym(RansSimdDec* r, RansWordTables const* tab)
 // Renormalize after decoding a symbol.
 static inline void RansSimdDecRenorm(RansSimdDec* r, uint16_t** pptr)
 {
+//    static int8_t const shuffles[16][16] __attribute__((aligned(16))) = {
     static ALIGNSPEC(int8_t const, shuffles[16][16], 16) = {
 #define _ -1 // for readability
         { _,_,_,_, _,_,_,_, _,_,_,_, _,_,_,_ }, // 0000
