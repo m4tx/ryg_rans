@@ -181,7 +181,6 @@ static inline uint32_t RansSimdDecSym(RansSimdDec* r, RansWordTables const* tab)
 // Renormalize after decoding a symbol.
 static inline void RansSimdDecRenorm(RansSimdDec* r, uint16_t** pptr)
 {
-//    static int8_t const shuffles[16][16] __attribute__((aligned(16))) = {
     static ALIGNSPEC(int8_t const, shuffles[16][16], 16) = {
 #define _ -1 // for readability
         { _,_,_,_, _,_,_,_, _,_,_,_, _,_,_,_ }, // 0000
