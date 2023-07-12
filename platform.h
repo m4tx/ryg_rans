@@ -20,7 +20,7 @@ static inline double timer()
     return 1.0 * ctr.QuadPart / freq.QuadPart;
 }
 
-#elif defined(__linux__)
+#elif defined(__linux__) || defined(__APPLE__)
 
 #define __STDC_FORMAT_MACROS
 #include <time.h>
